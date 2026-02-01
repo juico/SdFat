@@ -29,15 +29,27 @@
 #pragma once
 #include "../common/SysCall.h"
 #include "SdCardInterface.h"
-#ifdef SDIO_CONFIG_INCLUDE
-#include SDIO_CONFIG_INCLUDE
-#else   // SDIO_CONFIG_INCLUDE
+#define FIFO_SDIO 0
+#define DMA_SDIO 1
 /**
  * \class SdioConfig
- * \brief Empty SDIO card configuration.
+ * \brief SDIO card configuration.
  */
-class SdioConfig {};
-#endif  // SDIO_CONFIG_INCLUDE
+class SdioConfig {
+ public:
+  SdioConfig() {}
+  /**
+   * SdioConfig constructor.
+   * \param[in] opt SDIO options.
+   */
+  explicit SdioConfig(uint8_t opt) : m_options(opt) {}
+  /** \return SDIO card options. */
+  uint8_t options() {return m_options;}
+  /** \return true if DMA_SDIO. */
+  bool useDma() {return m_options & DMA_SDIO;}
+ private:
+  uint8_t m_options = FIFO_SDIO;
+};
 //------------------------------------------------------------------------------
 /**
  * \class SdioCard

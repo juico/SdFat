@@ -49,14 +49,14 @@ class PrintFile : public print_t, public BaseFile {
 #if defined(ARDUINO_SAM_DUE) && !defined(ARDUINO_API_VERSION)
   void flush() { BaseFile::sync(); }
 #else
-  void flush() override { BaseFile::sync(); }
+  void flush()  { BaseFile::sync(); }
 #endif
 
   /** Write a single byte.
    * \param[in] b byte to write.
    * \return one for success.
    */
-  size_t write(uint8_t b) override { return BaseFile::write(&b, 1); }
+  size_t write(uint8_t b)  { return BaseFile::write(&b, 1); }
 
   /** Write data to an open file.
    * \param[in] buffer pointer
@@ -84,9 +84,9 @@ class StreamFile : public stream_t, public BaseFile {
   /** \return number of bytes available from the current position to EOF
    *   or INT_MAX if more than INT_MAX bytes are available.
    */
-  int available() override { return BaseFile::available(); }
+  int available()  { return BaseFile::available(); }
   /** Ensure that any bytes written to the file are saved to the SD card. */
-  void flush() override { BaseFile::sync(); }
+  void flush()  { BaseFile::sync(); }
 
   /** This function reports if the current file is a directory or not.
    * \return true if the file is a directory.
@@ -101,7 +101,7 @@ class StreamFile : public stream_t, public BaseFile {
    *
    * \return The byte if no error and not at eof else -1;
    */
-  int peek() override { return BaseFile::peek(); }
+  int peek()  { return BaseFile::peek(); }
   /** \return the current file position. */
   PosType position() { return BaseFile::curPosition(); }
 
@@ -110,7 +110,7 @@ class StreamFile : public stream_t, public BaseFile {
    * \return For success return the next byte in the file as an int.
    * If an error occurs or end of file is reached return -1.
    */
-  int read() override { return BaseFile::read(); }
+  int read()  { return BaseFile::read(); }
 
   /** Rewind a file if it is a directory */
   void rewindDirectory() {

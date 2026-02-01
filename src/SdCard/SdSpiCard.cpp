@@ -23,6 +23,11 @@
  * DEALINGS IN THE SOFTWARE.
  */
 #include "SdSpiCard.h"
+#include "pico/stdlib.h"
+
+uint32_t millis(void) {
+  return to_ms_since_boot(get_absolute_time());
+}
 //==============================================================================
 class Timeout {
  public:

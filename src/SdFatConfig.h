@@ -31,7 +31,12 @@
 #ifdef __AVR__
 #include <avr/io.h>
 #endif  // __AVR__
-
+#define SPI_DRIVER_SELECT 3
+#define SD_CHIP_SELECT_MODE 2
+#define ENABLE_DEDICATED_SPI 1
+#define HAS_SDIO_CLASS 1
+#define SS 0
+#define USE_LFN_HASH  # to avoid use of arduino millis()
 // #include "SdFatDebugConfig.h"
 // To try UTF-8 encoded filenames.
 //  #define USE_UTF8_LONG_NAMES 1
@@ -89,15 +94,15 @@
 //------------------------------------------------------------------------------
 /** For Debug - must be one on Arduino */
 #ifndef ENABLE_ARDUINO_FEATURES
-#define ENABLE_ARDUINO_FEATURES 1
+#define ENABLE_ARDUINO_FEATURES 0
 #endif  //ENABLE_ARDUINO_FEATURES
 /** For Debug - must be one on Arduino */
 #ifndef ENABLE_ARDUINO_SERIAL
-#define ENABLE_ARDUINO_SERIAL 1
+#define ENABLE_ARDUINO_SERIAL 0
 #endif  //ENABLE_ARDUINO_SERIAL
 /** For Debug - must be one on Arduino */
 #ifndef ENABLE_ARDUINO_STRING
-#define ENABLE_ARDUINO_STRING 1
+#define ENABLE_ARDUINO_STRING 0
 #endif  //ENABLE_ARDUINO_STRING
 //------------------------------------------------------------------------------
 #if ENABLE_ARDUINO_FEATURES
@@ -166,7 +171,7 @@
  * 3 - An external SPI driver derived from SdSpiBaseClass is always used.
  */
 #ifndef SPI_DRIVER_SELECT
-#define SPI_DRIVER_SELECT 0
+#define SPI_DRIVER_SELECT 3
 #endif  // SPI_DRIVER_SELECT
 /**
  * If USE_SPI_ARRAY_TRANSFER is one and the standard SPI library is

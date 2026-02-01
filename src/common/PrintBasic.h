@@ -42,6 +42,8 @@ class __FlashStringHelper;
   (reinterpret_cast<const __FlashStringHelper *>(PSTR(string_literal)))
 #else  // defined(__AVR__)
 #define F(str) (str)
+struct __FlashStringHelper {};
+
 #endif  // defined(__AVR__)
 #endif  // F
 

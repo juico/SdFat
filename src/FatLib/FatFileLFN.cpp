@@ -27,6 +27,12 @@
 #include "../common/FsUtf.h"
 #include "../common/upcase.h"
 #include "FatLib.h"
+#include "pico/stdlib.h"
+
+// uint32_t millis(void) {
+//   return to_ms_since_boot(get_absolute_time());
+// }
+
 #if USE_LONG_FILE_NAMES
 //------------------------------------------------------------------------------
 static bool isLower(char c) { return 'a' <= c && c <= 'z'; }
@@ -226,7 +232,7 @@ bool FatFile::makeUniqueSfn(FatLfn_t* fname) {
 
   for (uint8_t seq = FIRST_HASH_SEQ; seq < 100; seq++) {
     DBG_WARN_IF(seq > FIRST_HASH_SEQ);
-    hex += millis();
+    hex += to_ms_since_boot(get_absolute_time());
     if (pos > 3) {
       // Make space in name for ~HHHH.
       pos = 3;
